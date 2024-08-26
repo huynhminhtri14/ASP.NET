@@ -272,6 +272,7 @@
     <Content Include="Content\images\brand\dell.png" />
     <Content Include="Content\images\brand\mac.png" />
     <Content Include="Content\images\category\dienthoai.png" />
+    <Content Include="Content\images\category\dongho.png" />
     <Content Include="Content\images\category\maytinh.png" />
     <Content Include="Content\images\category\phukien.png" />
     <Content Include="Content\css\bootstrap.css" />

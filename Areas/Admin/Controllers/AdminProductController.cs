@@ -70,10 +70,10 @@ namespace HuynhMinhTri_2122110256.Areas.Admin.Controllers
                     objProduct.Image = fileName;
                     objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/product/"), fileName));
                 }
-                if (objProduct.Description.Length > 500) // Ví dụ: giới hạn mô tả là 500 ký tự
-                {
-                    ModelState.AddModelError("Description", "Mô tả không được vượt quá 500 ký tự.");
-                }
+                //if (objProduct.Description.Length > 500) // Ví dụ: giới hạn mô tả là 500 ký tự
+                //{
+                //    ModelState.AddModelError("Description", "Mô tả không được vượt quá 500 ký tự.");
+                //}
                 objProduct.CreatedOnUtc = DateTime.Now;
                 objProduct.Deleted = false;
                 dbObj.Products.Add(objProduct);
