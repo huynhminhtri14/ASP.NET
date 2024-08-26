@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="slug" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="parent_id" Type="int" Nullable="false" />
+    <Property Name="sort_order" Type="int" Nullable="false" />
+    <Property Name="image" Type="nvarchar" MaxLength="1000" />
+    <Property Name="descripsion" Type="nvarchar(max)" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+    <Property Name="updated_by" Type="int" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="aspModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

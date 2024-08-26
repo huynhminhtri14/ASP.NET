@@ -1,0 +1,74 @@
+﻿@model HuynhMinhTri_2122110256.Models.Brand
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "AdminBrand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal p-4" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+    <h4 class="mb-4 text-center text-bg-info">Thêm danh mục</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.brandName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.brandName, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+            @Html.ValidationMessageFor(model => model.brandName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            @if (ViewData.ModelState.ContainsKey("Description"))
+            {
+                <div class="text-danger">@ViewData.ModelState["Description"].Errors.FirstOrDefault()Mô tả không được vượt quá 500 ký tự.</div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="ImageUpload" class="col-md-12" />
+            @Html.ValidationMessage("ImageUpload", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.status)
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger col-md-10" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.showOnHomePage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.showOnHomePage)
+                @Html.ValidationMessageFor(model => model.showOnHomePage, "", new { @class = "text-danger col-md-10" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-info" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay về danh sách", "Index")
+</div>

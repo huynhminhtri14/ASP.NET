@@ -1,0 +1,99 @@
+﻿@model HuynhMinhTri_2122110256.Models.HomeModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="container my-4">
+    <h1 class="text-center text-successs">Chi tiết đơn hàng</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th> Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        double total = 0;
+                        double price = 0;
+                        int count = 0;
+                    }
+                    @foreach (var item in Model.ListOrderDetail)
+                    {
+                        var product = Model.ListProduct.FirstOrDefault(p => p.Id == item.ProductId); 
+
+
+                        <tr>
+                            @if (product.Id > 0)
+                            {
+                                count++;
+                            }
+                            <td>@product.Name</td>
+                            <td>
+                                <img src="~/Content/images/product/@product.Image" class="img-fluid" style="width: 150px" />
+                            </td>
+
+                            @if (product.PriceSale > 0)
+                            {
+                                price = product.PriceSale;
+                                total = price * item.Quantity;
+                            }
+                            else
+                            {
+                                price = product.Price;
+                                total = price * item.Quantity;
+                            }
+                            <td>@price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                            <td>@item.Quantity Sản phẩm</td>
+                            <td>@total.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="6" class="text-end">
+                            <strong>Tổng sản phẩm:  @count </strong>
+                        </th>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="md-3">
+                <label>Họ Tên</label>
+                <input type="text" name="name" value="@Model.User.first_name @Model.User.last_name" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="md-3">
+                <label>Email</label>
+                <input type="text" name="email" value="@Model.User.email" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="md-3">
+                <label>Điện thoại</label>
+                <input type="text" name="phone" value="@Model.User.phone" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="md-3">
+                <label>Địa chỉ</label>
+                <input type="text" name="address" value="@Model.User.address" class="form-control">
+            </div>
+        </div>
+
+    </div>
+    <a href="@Url.Action("Index")" class="btn btn-secondary mt-3">Quay về danh sách</a>
+</div>

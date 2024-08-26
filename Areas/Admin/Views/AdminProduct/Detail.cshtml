@@ -1,0 +1,69 @@
+﻿@model HuynhMinhTri_2122110256.Models.Product
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<div class="container mt-5">
+    <h4 class="text-center mb-4"><b>Chi tiết sản phẩm</b></h4>
+    <hr />
+    <div class="row card">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.Category_id):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.Category_id)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.Name):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.Name)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.Price):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.Price)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.PriceSale):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.PriceSale)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.Description):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.Description)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.Brand_id):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.Brand_id)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 font-weight-bold">@Html.DisplayNameFor(model => model.TypeId):</label>
+                <div class="col-sm-8">
+                    <p>@Html.DisplayFor(model => model.TypeId)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Image):</label>
+                <div class="col-sm-10">
+                    <img src="~/Content/images/product/@Model.Image" alt="Product Image" class="img-fluid" style="max-width: 200px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="text-center mt-4">
+        @Html.ActionLink("Chỉnh sửa","Edit", "AdminProduct", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Quay về danh sách", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>

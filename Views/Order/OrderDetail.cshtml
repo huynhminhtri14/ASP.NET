@@ -1,0 +1,49 @@
+﻿@model HuynhMinhTri_2122110256.Models.HomeModel
+@{
+    ViewBag.Title = "OrderDetail";
+}
+
+<table class="table table-bordered my-5">
+    <tr class="bg-success">
+        <th style="width:150px">Tên sản phẩm</th>
+        <th style="width:200px">Hình ảnh</th>
+        <th style="width:150px">Số lượng</th>
+        <th style="width:150px">Giá tiền</th>
+        <th style="width:100px">Tổng tiền</th>
+    </tr>
+    @{
+        double total = 0;
+        double price = 0;
+    }
+    @foreach (var item in Model.ListOrderDetail)
+    {
+        var product = Model.ListProduct.FirstOrDefault(p => p.Id == item.ProductId);
+
+        if (product != null)
+        {
+            <tr>
+                <td>@product.Name</td>
+
+                <td>
+                    <img src="~/Content/images/product/@product.Image" class="img-fluid" style="width: 150px" />
+                </td>
+                <td>@item.Quantity Sản phẩm</td>
+
+                @if (product.PriceSale > 0)
+                {
+                    price = product.PriceSale;
+                    total = price * item.Quantity;
+                }
+                else
+                {
+                    price = product.Price;
+                    total = price * item.Quantity;
+                }
+
+
+                <td>@price.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                <td>@total.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+            </tr>
+        }
+    }
+</table>

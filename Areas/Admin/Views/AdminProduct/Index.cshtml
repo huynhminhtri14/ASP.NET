@@ -1,0 +1,215 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<HuynhMinhTri_2122110256.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+   <style>
+       .pagination-container {
+           margin-top: 20px;
+       }
+
+       .pagination {
+           display: flex;
+           justify-content: center;
+           padding-left: 0;
+           list-style: none;
+           border-radius: 4px;
+       }
+
+       .page-item {
+           margin: 0 2px;
+       }
+
+       .page-link {
+           color: #007bff;
+           padding: 8px 12px;
+           text-decoration: none;
+           border: 1px solid #dee2e6;
+           border-radius: 4px;
+           transition: background-color 0.3s;
+       }
+
+           .page-link:hover {
+               background-color: #f8f9fa;
+           }
+
+       .page-item.active .page-link {
+           background-color: #007bff;
+           color: #fff;
+           border-color: #007bff;
+       }
+
+       .page-item.disabled .page-link {
+           color: #6c757d;
+           pointer-events: none;
+           background-color: #e9ecef;
+       }
+
+   </style>
+    <section class="content mt-4">
+        <div class="container-fluid">
+            <h2>Quản lý sản phẩm</h2>
+            <div class="row">
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="@Url.Action("Create", "AdminProduct")" class="btn border-dark btn-info">
+                                Thêm danh mục
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="@Url.Action("Trash", "AdminProduct")" class="btn border-dark btn-danger">
+                                Thùng rác
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">
+                    @using (Html.BeginForm("Index", "AdminProduct", FormMethod.Get))
+                    {
+                        <p class="text-right">
+                            Tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentlyFilter as string, new { @class = "form-control d-inline-block", @style = "width: auto;" })
+                            <input type="submit" value="Tìm kiếm" class="btn btn-info" />
+                        </p>
+                    }
+                </div>
+
+                <table class="table">
+                    <tr class="bg-dark">
+                        <th style="width:150px"> Tên sản phẩm </th>
+                        <th style="width:200px"> Hình ảnh </th>
+                        <th style="width:150px">Danh mục</th>
+                        <th style="width:200px"> Mô tả </th>
+                        <th style="width:100px"> Thương hiệu </th>
+                        <th> Giá gốc</th>
+                        <th style="width:150px"> Giá khuyến mãi </th>
+                        <th>Tùy chọn</th>
+                    </tr>
+                  
+                    @foreach (var item in Model)
+                    {
+               
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <img src="~/Content/images/product/@item.Image" class="img-fluid">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            @*<td>
+                        @Html.DisplayFor(modelItem => Model.FirstOrDefault().ListBrand.Where(p => p.id == item.Brand_id).First().brandName)
+                    </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PriceSale)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit","AdminProduct", new {@id = item.Id})" class="m-1"> <i class="nav-icon fas fa-edit text-warning"></i></a>
+                                <a href="@Url.Action("Delete","AdminProduct", new {@id = item.Id})" class="m-1"> <i class="nav-icon fas fa-trash text-danger"></i></a>
+                                <a href="@Url.Action("Detail","AdminProduct", new {@id = item.Id})" class="m-1"> <i class="nav-icon fas fa-eye text-success"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                @{
+                    var totalPages = Model.PageCount;
+                    var currentPage = Model.PageNumber;
+                }
+
+                <div class="pagination-container text-center">
+                    <ul class="pagination">
+                        @* Link to First Page *@
+                        @if (currentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a href="@Url.Action("Index", new { page = 1, currentFilter = ViewBag.CurrentFilter })" class="page-link">First</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">First</span>
+                            </li>
+                        }
+
+                        @* Link to Previous Page *@
+                        @if (currentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a href="@Url.Action("Index", new { page = currentPage - 1, currentFilter = ViewBag.CurrentFilter })" class="page-link">Previous</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        }
+
+                        @* Page Numbers *@
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            if (i == currentPage)
+                            {
+                                <li class="page-item active">
+                                    <span class="page-link">@i</span>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a href="@Url.Action("Index", new { page = i, currentFilter = ViewBag.CurrentFilter })" class="page-link">@i</a>
+                                </li>
+                            }
+                        }
+
+                        @* Link to Next Page *@
+                        @if (currentPage < totalPages)
+                        {
+                            <li class="page-item">
+                                <a href="@Url.Action("Index", new { page = currentPage + 1, currentFilter = ViewBag.CurrentFilter })" class="page-link">Next</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                        }
+
+                        @* Link to Last Page *@
+                        @if (currentPage < totalPages)
+                        {
+                            <li class="page-item">
+                                <a href="@Url.Action("Index", new { page = totalPages, currentFilter = ViewBag.CurrentFilter })" class="page-link">Last</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled">
+                                <span class="page-link">Last</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <p class="text-center">
+                    Trang @currentPage of @totalPages
+                </p>
+
+
+            </div>
+    </section>

@@ -1,0 +1,81 @@
+﻿@model HuynhMinhTri_2122110256.Models.Product
+
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<div class="container mt-3">
+    <h2 class="text-danger text-center">Xóa sản phẩm</h2>
+
+    <h3 class="text-center text-warning">Bạn chắc chắn muốn xóa sản phẩm này?</h3>
+
+    <div class="card mt-4 p-4">
+        <h4 class="text-center">Chi tiết sản phẩm</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Category:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Category_id)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Name:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Price:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Price)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Sale Price:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.PriceSale)</p>
+                    </div>
+                </div>
+               
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Description:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Description)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Type ID:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.TypeId)</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Brand ID:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Brand_id)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center mt-3">
+                <img src="~/Content/images/product/@Model.Image" alt="Product Image" class="img-fluid rounded" style="max-width: 200px;" />
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center my-4">
+        @using (Html.BeginForm("Delete", "AdminProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-danger btn-lg">Xóa</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg ml-3">Quay về danh sách</a>
+        }
+    </div>
+</div>

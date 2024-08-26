@@ -1,0 +1,47 @@
+﻿@model HuynhMinhTri_2122110256.Models.Order
+@{
+    ViewBag.Title = "Restore";
+}
+
+<div class="container mt-3">
+    <h2 class="text-success text-center">Khôi phục đơn hàng</h2>
+
+    <h3 class="text-center text-warning">Bạn chắc chắn muốn khôi phục đơn hàng này?</h3>
+
+    <div class="card mt-4 p-4">
+        <h4 class="text-center">Chi tiết đơn hàng</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Mã đơn hàng:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Id)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Tên đơn hàng:</label>
+                    <div class="col-sm-8">
+                        <p>@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 font-weight-bold">Tình trạng:</label>
+                    <div class="col-sm-8">
+                        <p> Đã hủy </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="text-center my-4">
+        @using (Html.BeginForm("Restore", "AdminOrder", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-success btn-lg">Khôi phục</button>
+        }
+    </div>
+</div>
+
+
